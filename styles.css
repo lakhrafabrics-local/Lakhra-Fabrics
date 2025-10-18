@@ -1,0 +1,168 @@
+/* --- CORE LAYOUT & SCROLL FIXES --- */
+body { 
+    max-width: 100vw; 
+    overflow-x: hidden; 
+}
+
+.container-mobile { 
+    max-width: 500px; 
+    margin: 0 auto; 
+    min-height: calc(100vh - 4px); 
+}
+
+/* Smaller font and padding for better field fitting on mobile/A4 print */
+input, select, button { 
+    font-size: 13px !important; 
+}
+
+/* LIVE VIEW FIX: Add bottom padding to prevent fixed buttons from overlapping content */
+.print-area {
+    padding-bottom: 70px !important; 
+}
+
+/* --- TABLE ALIGNMENT & CLIPPING FIXES --- */
+table { 
+    font-size: 11px; 
+    width: 100%;
+    table-layout: fixed;
+}
+
+.table-mobile th {
+    padding: 6px 3px !important; 
+}
+
+.table-mobile td {
+    padding: 3px !important;
+}
+
+.table-mobile input, .table-mobile select {
+    font-size: 11px;
+    padding: 4px; 
+    line-height: normal;
+    height: auto;
+    min-width: 0; 
+    box-sizing: border-box;
+}
+
+.text-right input {
+    text-align: right !important;
+}
+
+.print-only {
+    display: none; 
+}
+
+/* Custom Watermark Style */
+.watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    color: rgba(255, 0, 0, 0.1); 
+    font-size: 20px; 
+    font-weight: 800;
+    text-transform: uppercase;
+    pointer-events: none;
+    z-index: 1000;
+    white-space: nowrap;
+}
+
+/* Fix for print area in live view */
+@media screen {
+    .print-area {
+        padding-bottom: 70px !important;
+    }
+}
+
+/* --- PRINT STYLES --- */
+@media print {
+    body * { 
+        visibility: hidden !important; 
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    .print-area, .print-area * { 
+        visibility: visible !important; 
+    }
+    
+    .print-area {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 12px !important; 
+        box-shadow: none !important;
+        border: none !important;
+    }
+    
+    .no-print, .no-print *, .no-print button, 
+    .fixed, .fixed * {
+        display: none !important; 
+        visibility: hidden !important;
+    }
+    
+    .print-area input:not([type="button"]):not([type="submit"]):not([type="reset"]), 
+    .print-area select {
+        border: none !important;
+        background: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        box-shadow: none !important;
+        line-height: 1.2;
+        font-size: 12px !important; 
+        text-align: left !important; 
+        display: none;
+    }
+
+    .print-only {
+        display: inline-block !important;
+        font-size: 12px !important; 
+    }
+
+    .table-mobile input {
+        border: none !important;
+        padding: 0 1px !important; 
+        white-space: normal !important; 
+        text-align: left !important;
+    }
+    
+    .table-mobile td {
+        padding: 1px !important;
+        word-wrap: break-word;
+        overflow: visible !important;
+    }
+
+    .print-area input[type="text"], 
+    .print-area input[type="number"], 
+    .print-area input[type="date"] {
+        display: inline-block;
+    }
+    
+    .table-mobile {
+        border-collapse: collapse !important;
+        width: 100% !important;
+    }
+    
+    .table-mobile th, .table-mobile td {
+        border: 1px solid #000 !important;
+        overflow: visible !important;
+        text-overflow: unset !important;
+        white-space: normal !important;
+    }
+    
+    .bg-blue-100, .bg-green-100, .bg-purple-100, .bg-red-100, .bg-orange-100 {
+        background-color: #f0f0f0 !important;
+    }
+    
+    .print-area > div {
+        margin-bottom: 10px !important;
+    }
+}
+
+/* Temporary printing class */
+body.is-printing .print-area {
+    position: relative;
+}
